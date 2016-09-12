@@ -1,4 +1,22 @@
+--[[
 
+  Microsoft Cognitive Services SDK for FlashAir using Lua
+
+  Author:  Takeshi Sakurai
+  Version: 1.0
+  License: Apache License 2.0
+
+]]
+
+--[[
+
+  HTTPs request
+
+  url:  request URI
+  file: photo, video file name
+  key:  Cognitive Services Access Key
+
+]]
 function cs_request(url,file,key)
   contenttype = "application/octet-stream"
   mes = "<!--WLANSDFILE-->¥r¥n"
@@ -15,13 +33,38 @@ function cs_request(url,file,key)
   return b
 end
 
-function cs_face(file,key)
-  url="https://api.projectoxford.ai/face/v1.0/recognize"
-  cs_request(url,file,key)
+--[[
+
+  Face API
+
+  file: photo file name 
+  key:  Cognitive Services Access Key
+
+]]
+
+-- Face Detection
+function cs_face_detect(file,key)
+  url="https://api.projectoxford.ai/face/v1.0/detect"
+  return cs_request(url,file,key)
 end
 
-function cs_emotion(file,key)
+--[[
+
+  Emotion API
+
+  file: photo,video file name       
+  key:  Cognitive Services Access Key
+
+]]
+
+-- Emotion Recognition
+function cs_emotion_recognize(file,key)
   url="https://api.projectoxford.ai/emotion/v1.0/recognize"
-  cs_request(url,file,key)
+  return cs_request(url,file,key)
 end
 
+-- Emotion Recognition in Video
+function cs_emotion_recognizeinvideo(file,key)
+  url="https://api.projectoxford.ai/emotion/v1.0/recognizeinvideo"
+  return cs_request(url,file,key)
+end
